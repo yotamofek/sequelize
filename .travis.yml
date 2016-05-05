@@ -21,15 +21,14 @@ env:
 
 addons:
   postgresql: "9.4"
+  apt:
+    packages:
+      - libpq-dev
 
 before_script:
   - "mysql -e 'create database sequelize_test;'"
   - "psql -c 'create database sequelize_test;' -U postgres"
   - "psql sequelize_test -c 'create extension postgis;' -U postgres"
-
-before_install:
-  - "sudo apt-get -qq update"
-  - "sudo apt-get install -y libpq-dev"
 
 script:
   - "npm test"
